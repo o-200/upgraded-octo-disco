@@ -1,8 +1,11 @@
 require_relative 'application_controller'
 require_relative '../use_cases/discount_calculator'
+require_relative '../use_cases/total_price_calculator'
 
 module App
   module Controllers
+    # напрашивается presenter layer (использование например gem alba https://github.com/okuramasafumi/alba),
+    # но я не стал его добавлять, чтобы не усложнять задачу
     class DiscountsController < ApplicationController
       def calculate_discounts(request)
         params = parse_req_body(request)

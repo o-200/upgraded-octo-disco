@@ -4,12 +4,13 @@ require_relative '../repositories/template_repository'
 
 module App
   module UseCases
+    # можно было бы вынести логику в отдельные классы, но в данном случае это избыточно. Класс <100 строк
     class DiscountCalculator
       def call(positions, user_id)
-        user = Repositories::UserRepository.find_by_id(user_id)
+        user = Repositories::UserRepository.find_by_id(user_id).first
         return { status: 'error', message: 'User not found' }.to_json unless user
 
-        loyalty_level = Repositories::TemplateRepository.find_by_user(user)
+        loyalty_level = Repositories::TemplateRepository.find_by_user(user).first
 
         response_positions = []
         total_price = 0

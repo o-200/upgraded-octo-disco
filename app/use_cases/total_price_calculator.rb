@@ -1,13 +1,12 @@
 require_relative '../repositories/product_repository'
 require_relative '../repositories/user_repository'
-require_relative '../repositories/template_repository'
 
 
 module App
   module UseCases
     class TotalPriceCalculator
       def call(user_id, operation_id, write_off)
-        user = Repositories::UserRepository.find_by_id(user_id)
+        user = Repositories::UserRepository.find_by_id(user_id).first
         return { code: 404, status: 'Not Found', details: "User not found" }.to_json unless user
 
         operation = Repositories::OperationRepository.find_by_id(operation_id)
